@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Container } from "@mui/material";
+import { Grid } from "@mui/material";
 import SongTimeline from "./components/SongTimeline";
 import Sidebar from "./components/Sidebar";
 import data from "./data.json";
@@ -12,32 +12,37 @@ function App() {
 
   const handleYearRangeChange = (newValues) => {
     setYearRange(newValues);
-    const isFullRange = newValues[0] === 1969 && newValues[1] === 2024;
-    setImageSize(isFullRange ? 24 : 40);
+    const range = newValues[1] - newValues[0];
+    if (range <= 5) {
+      setImageSize(200);
+    } else if (range <= 10) {
+      setImageSize(80);
+    } else if (range <= 20) {
+      setImageSize(60);
+    } else if (range <= 30) {
+      setImageSize(40);
+    } else {
+      setImageSize(24);
+    }
   };
-
-  const totalAlbums = data.songs.length;
 
   return (
     <>
       <NavBar />
-      <>
-        <Grid container>
-          <Grid item xs={12} md={10}>
-            <SongTimeline
-              minYear={yearRange[0]}
-              maxYear={yearRange[1]}
-              imageSize={imageSize}
-              yearRange={yearRange}
-              handleYearRangeChange={handleYearRangeChange}
-              totalAlbums={totalAlbums}
-            />
-          </Grid>
-          <Grid item xs={12} md={2}>
-            <Sidebar />
-          </Grid>
+      <Grid container>
+        <Grid item xs={12} md={10}>
+          <SongTimeline
+            minYear={yearRange[0]}
+            maxYear={yearRange[1]}
+            imageSize={imageSize}
+            yearRange={yearRange}
+            handleYearRangeChange={handleYearRangeChange}
+          />
         </Grid>
-      </>
+        <Grid item xs={12} md={2}>
+          <Sidebar />
+        </Grid>
+      </Grid>
     </>
   );
 }

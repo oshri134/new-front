@@ -1,6 +1,8 @@
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useMemo, useEffect, useState, useRef } from "react";
+import PropTypes from "prop-types";
 import RangeSlider from "./RangeSlider";
 import data from "./data.json";
+import "./SongTimeline.css";
 
 const defaultImageUrl =
   "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png";
@@ -10,28 +12,26 @@ const SongTimeline = ({
   maxYear,
   yearRange,
   handleYearRangeChange,
-  totalAlbums,
+  imageSize,
 }) => {
-  const [imageSize, setImageSize] = useState(40);
   const [spaceGrid, setSpaceGrid] = useState(0);
+  const [mouseX, setMouseX] = useState(0);
+  const songTimelineRef = useRef(null);
+  const scrollStep = 10;
+  const scrollThreshold = 50;
 
   useEffect(() => {
     const range = yearRange[1] - yearRange[0];
     if (range <= 5) {
-      setImageSize(100);
       setSpaceGrid(30);
     } else if (range <= 10) {
-      setImageSize(80);
       setSpaceGrid(20);
     } else if (range <= 20) {
-      setImageSize(60);
       setSpaceGrid(10);
     } else if (range <= 30) {
-      setImageSize(40);
       setSpaceGrid(20);
     } else {
-      setSpaceGrid(20);
-      setImageSize(24);
+      setSpaceGrid(10);
     }
   }, [yearRange]);
 
@@ -47,19 +47,47 @@ const SongTimeline = ({
       }, {});
   }, [minYear, maxYear]);
 
-  const numOfYears = maxYear - minYear + 1; // Number of years in the selected range
-  const gridWidth = numOfYears * (imageSize + spaceGrid); // Calculating width according to years
-  console.log(data.songs.length);
+  const numOfYears = maxYear - minYear + 1;
+  const gridWidth = numOfYears * (imageSize + spaceGrid);
+
+  const handleMouseMove = (e) => {
+    const boundingRect = e.currentTarget.getBoundingClientRect();
+    const relativeMouseX =
+      e.clientX - boundingRect.left + songTimelineRef.current.scrollLeft;
+    setMouseX(relativeMouseX);
+
+    if (e.clientX < boundingRect.left + scrollThreshold) {
+      songTimelineRef.current.scrollLeft -= scrollStep;
+    } else if (e.clientX > boundingRect.right - scrollThreshold) {
+      songTimelineRef.current.scrollLeft += scrollStep;
+    }
+  };
+
   return (
-    <div className="song-timeline-wrapper">
+    <div
+      className="song-timeline-wrapper"
+      onMouseMove={handleMouseMove}
+      ref={songTimelineRef}
+    >
       <div
         className="song-timeline grid-background"
         style={{
           width: `${gridWidth}px`,
-
           backgroundSize: `${imageSize + 10}px ${imageSize + 10}px`,
         }}
       >
+        <div className="years-labels">
+          {Array.from({ length: numOfYears }, (_, index) => (
+            <div
+              key={index}
+              className="year-label"
+              style={{ width: `${imageSize + spaceGrid}px` }}
+            >
+              {minYear + index}
+            </div>
+          ))}
+        </div>
+        <div className="mouse-line" style={{ left: `${mouseX}px` }} />
         <div className="year-group">
           {Object.entries(songsByYear).map(([year, songs]) => (
             <YearColumn key={year} songs={songs} imageSize={imageSize} />
@@ -70,7 +98,6 @@ const SongTimeline = ({
         <RangeSlider
           values={yearRange}
           setValues={handleYearRangeChange}
-          totalAlbums={totalAlbums}
           imageSize={imageSize}
         />
       </div>
@@ -94,6 +121,9 @@ const SongItem = ({ song, imageSize }) => (
     style={{
       width: `${imageSize}px`,
       height: `${imageSize}px`,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     }}
   >
     <img
@@ -102,10 +132,18 @@ const SongItem = ({ song, imageSize }) => (
       style={{
         width: "100%",
         height: "100%",
-        objectFit: "cover",
+        objectFit: "contain",
       }}
     />
   </div>
 );
+
+SongTimeline.propTypes = {
+  minYear: PropTypes.number.isRequired,
+  maxYear: PropTypes.number.isRequired,
+  yearRange: PropTypes.arrayOf(PropTypes.number).isRequired,
+  handleYearRangeChange: PropTypes.func.isRequired,
+  imageSize: PropTypes.number.isRequired,
+};
 
 export default SongTimeline;

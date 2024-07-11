@@ -11,7 +11,10 @@
   overflow: hidden;
   background: black;
 }
-
+.slider-wrapper {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
 .range-thumb {
   height: 20px;
   width: 20px;
@@ -71,11 +74,11 @@
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  margin: 0 10px;
+  padding: 5px;
 }
 
 .year-songs {
-  margin-bottom: 90px;
+  margin-bottom: 78px;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
@@ -91,7 +94,8 @@
   width: 40px;
   height: 40px;
   box-sizing: border-box;
-  margin: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
   padding: 0;
 }
 
@@ -99,4 +103,69 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: cover;
+}
+.song-timeline-wrapper {
+  position: relative;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.song-timeline-wrapper::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.song-timeline {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+
+  position: relative;
+}
+
+.years-labels {
+  display: flex;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+}
+
+.year-label {
+  text-align: center;
+  border-right: 1px solid #ccc;
+  padding: 5px 0;
+  box-sizing: border-box;
+}
+
+.mouse-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: red;
+  pointer-events: none;
+}
+
+.year-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.year-column {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.year-songs {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.song-item {
+  margin: 2px;
 }

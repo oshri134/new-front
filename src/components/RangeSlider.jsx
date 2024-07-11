@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useCallback, useState } from "react";
+import PropTypes from "prop-types";
 import { Range, getTrackBackground } from "react-range";
 import "./RangeSlider.css";
+import { colors } from "../style/color";
 
 const STEP = 1;
 const MIN = 1969;
@@ -19,7 +21,7 @@ function debounce(func, wait) {
   };
 }
 
-const RangeSlider = ({ values, setValues, totalAlbums, imageSize }) => {
+const RangeSlider = ({ values, setValues, imageSize }) => {
   const sliderRef = useRef();
   const [localValues, setLocalValues] = useState(values);
 
@@ -76,58 +78,63 @@ const RangeSlider = ({ values, setValues, totalAlbums, imageSize }) => {
   }
 
   const numberOfYears = localValues[1] - localValues[0] + 1;
-
-  console.log(numberOfYears);
-  const gridWidth = numberOfYears * (imageSize + 20); // כולל מרווחים בין השנים
+  const gridWidth = numberOfYears * (imageSize + 7);
 
   const years = Array.from({ length: MAX - MIN + 1 }, (_, i) => MIN + i);
 
   return (
     <div ref={sliderRef} className="range-slider-container">
-      <Range
-        values={localValues}
-        step={STEP}
-        min={MIN}
-        max={MAX}
-        onChange={setLocalValues}
-        renderTrack={({ props, children }) => (
-          <div
-            {...props}
-            style={{
-              ...props.style,
-              height: "6px",
-              width: `${gridWidth}px `,
-              background: getTrackBackground({
-                values: localValues,
-                colors: ["white", "black", "white"],
-                min: MIN,
-                max: MAX,
-              }),
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            {years.map((year) => (
-              <div key={year} className="range-tick" />
-            ))}
-            {children}
-          </div>
-        )}
-        renderThumb={({ props }) => (
-          <div
-            {...props}
-            style={{
-              ...props.style,
-              height: "20px",
-              width: "20px",
-              borderRadius: "50%",
-              backgroundColor: "black",
-            }}
-          />
-        )}
-      />
+      <div className="slider-wrapper">
+        <Range
+          values={localValues}
+          step={STEP}
+          min={MIN}
+          max={MAX}
+          onChange={setLocalValues}
+          renderTrack={({ props, children }) => (
+            <div
+              {...props}
+              style={{
+                ...props.style,
+                height: "12px",
+                width: `${gridWidth}px`,
+                background: getTrackBackground({
+                  values: localValues,
+                  colors: ["white", "black", "white"],
+                  min: MIN,
+                  max: MAX,
+                }),
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              {years.map((year) => (
+                <div key={year} className="range-tick" />
+              ))}
+              {children}
+            </div>
+          )}
+          renderThumb={({ props }) => (
+            <div
+              {...props}
+              style={{
+                ...props.style,
+                height: "20px",
+                width: "4px",
+                backgroundColor: `${colors.textUI}`,
+              }}
+            />
+          )}
+        />
+      </div>
     </div>
   );
+};
+
+RangeSlider.propTypes = {
+  values: PropTypes.arrayOf(PropTypes.number).isRequired,
+  setValues: PropTypes.func.isRequired,
+  imageSize: PropTypes.number.isRequired,
 };
 
 export default RangeSlider;
