@@ -16,6 +16,7 @@ const SongTimeline = ({
 }) => {
   const [spaceGrid, setSpaceGrid] = useState(0);
   const [mouseX, setMouseX] = useState(0);
+  const [hoverYear, setHoverYear] = useState(null);
   const songTimelineRef = useRef(null);
   const scrollStep = 10;
   const scrollThreshold = 50;
@@ -61,6 +62,10 @@ const SongTimeline = ({
     } else if (e.clientX > boundingRect.right - scrollThreshold) {
       songTimelineRef.current.scrollLeft += scrollStep;
     }
+
+    const yearWidth = boundingRect.width / numOfYears;
+    const hoverYear = minYear + Math.floor(relativeMouseX / yearWidth);
+    setHoverYear(hoverYear);
   };
 
   return (
@@ -80,7 +85,9 @@ const SongTimeline = ({
           {Array.from({ length: numOfYears }, (_, index) => (
             <div
               key={index}
-              className="year-label"
+              className={`year-label ${
+                hoverYear === minYear + index ? "highlighted" : ""
+              }`}
               style={{ width: `${imageSize + spaceGrid}px` }}
             >
               {minYear + index}
