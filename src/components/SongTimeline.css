@@ -1,0 +1,125 @@
+.song-timeline-wrapper {
+  height: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Disable vertical scrolling */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.song-timeline-wrapper::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.song-timeline {
+  display: flex;
+  width: 100%; /* Ensure the timeline takes the full width */
+}
+
+.year-group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.year-column {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  padding: 5px;
+}
+
+.year-songs {
+  margin-bottom: 78px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 0;
+}
+
+.song-item img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+.song-timeline-wrapper {
+  position: relative;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.song-timeline-wrapper::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.song-timeline {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+
+  position: relative;
+}
+
+.years-labels {
+  display: flex;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+}
+
+.year-label {
+  text-align: center;
+  padding: 0;
+  line-height: 1.5; /* Adjust to align the year labels vertically */
+  box-sizing: border-box;
+  border-right: 1px solid #ccc;
+  font-size: 12px; /* Adjust font size if needed */
+  margin-top: -10px; /* Align the year labels with the border top */
+}
+
+.mouse-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: red;
+  pointer-events: none;
+}
+
+.year-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.year-column {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.year-songs {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.song-item {
+  margin: 2px;
+}
