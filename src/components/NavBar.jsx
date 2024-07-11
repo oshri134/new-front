@@ -6,7 +6,7 @@ const NavBar = () => {
       style={{
         alignSelf: "stretch",
         backgroundColor: "#fffefd",
-        borderBottom: "1.8px solid #232323",
+
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
@@ -22,7 +22,6 @@ const NavBar = () => {
         color: "#bfbfbf",
         fontFamily: "Levit_1950",
       }}
-
     >
       <nav
         style={{
@@ -166,6 +165,7 @@ const NavBar = () => {
             color: "inherit",
             whiteSpace: "nowrap",
           }}
+          href="#"
         >
           פזמון: חוזר
         </a>

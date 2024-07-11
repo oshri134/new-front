@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import SongTimeline from "./components/SongTimeline";
 import Sidebar from "./components/Sidebar";
-import data from "./data.json";
 import NavBar from "./components/NavBar";
 import "./App.css";
 

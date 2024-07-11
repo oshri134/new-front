@@ -24,13 +24,13 @@
   top: 0;
   background: white;
   z-index: 10;
-  border-bottom: 1px solid black; /* Add border-bottom to align years with the timeline border */
+  border-top: 1px solid black; /* Add border-top to align years with the timeline border */
 }
 
 .year-label {
   text-align: center;
   padding: 0;
-  line-height: 1; /* Adjust to align the year labels vertically */
+  line-height: 1.5; /* Adjust to align the year labels vertically */
   box-sizing: border-box;
   border-right: 1px solid #ccc;
   font-size: 12px; /* Adjust font size if needed */

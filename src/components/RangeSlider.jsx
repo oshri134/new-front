@@ -29,7 +29,6 @@ const RangeSlider = ({ values, setValues, imageSize }) => {
     (event) => {
       event.preventDefault();
       const [min, max] = localValues;
-      const range = max - min;
       const center = Math.round((min + max) / 2);
 
       const zoomFactor = 1 + event.deltaY * ZOOM_SENSITIVITY;
