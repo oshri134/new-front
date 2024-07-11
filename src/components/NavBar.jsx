@@ -165,7 +165,7 @@ const NavBar = () => {
             color: "inherit",
             whiteSpace: "nowrap",
           }}
-          href="#"
+          href="/"
         >
           פזמון: חוזר
         </a>

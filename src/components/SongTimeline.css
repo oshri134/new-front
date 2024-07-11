@@ -30,11 +30,15 @@
 .year-label {
   text-align: center;
   padding: 0;
-  line-height: 1.5; /* Adjust to align the year labels vertically */
+  line-height: 1; /* Align the year labels vertically */
   box-sizing: border-box;
   border-right: 1px solid #ccc;
   font-size: 12px; /* Adjust font size if needed */
   height: 20px; /* Adjust height to fit the year labels properly */
+  display: flex;
+  align-items: center; /* Center the text vertically */
+  justify-content: center; /* Center the text horizontally */
+  margin-top: -10px; /* Adjust this value to position the labels correctly */
 }
 
 .year-label.highlighted {
