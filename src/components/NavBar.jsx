@@ -1,12 +1,16 @@
 import React from "react";
 
-const NavBar = () => {
+const NavBar = ({ minYear, maxYear }) => {
+  const years = Array.from(
+    { length: maxYear - minYear + 1 },
+    (_, i) => minYear + i
+  );
+  
   return (
     <header
       style={{
         alignSelf: "stretch",
         backgroundColor: "#fffefd",
-
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
@@ -21,6 +25,8 @@ const NavBar = () => {
         fontSize: "20px",
         color: "#bfbfbf",
         fontFamily: "Levit_1950",
+        borderBottom: "2px solid black",
+        position: "relative",
       }}
     >
       <nav
@@ -34,117 +40,7 @@ const NavBar = () => {
           gap: "18px",
         }}
       >
-        <nav
-          style={{
-            margin: "0",
-            width: "82px",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "6px",
-            textAlign: "right",
-            fontSize: "17px",
-            color: "#000",
-            fontFamily: "SimplerPro_HLAR_Mono",
-          }}
-        >
-          <div
-            style={{
-              width: "10px",
-              position: "relative",
-              letterSpacing: "0.02em",
-              lineHeight: "12px",
-              fontWeight: "500",
-              display: "inline-block",
-              minWidth: "10px",
-            }}
-          >
-            [
-          </div>
-          <div
-            style={{
-              flex: "1",
-              position: "relative",
-              letterSpacing: "0.02em",
-              lineHeight: "12px",
-              fontWeight: "500",
-              display: "inline-block",
-              minWidth: "50px",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {`אודות `}
-          </div>
-          <div
-            style={{
-              width: "10px",
-              position: "relative",
-              letterSpacing: "0.02em",
-              lineHeight: "12px",
-              fontWeight: "500",
-              display: "inline-block",
-              minWidth: "10px",
-            }}
-          >
-            ]
-          </div>
-        </nav>
-        <nav
-          style={{
-            margin: "0",
-            flex: "1",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "6px",
-            textAlign: "right",
-            fontSize: "17px",
-            color: "#000",
-            fontFamily: "SimplerPro_HLAR_Mono",
-          }}
-        >
-          <div
-            style={{
-              width: "10px",
-              position: "relative",
-              letterSpacing: "0.02em",
-              lineHeight: "12px",
-              fontWeight: "500",
-              display: "inline-block",
-              minWidth: "10px",
-            }}
-          >
-            [
-          </div>
-          <div
-            style={{
-              flex: "1",
-              position: "relative",
-              letterSpacing: "0.02em",
-              lineHeight: "12px",
-              fontWeight: "500",
-              display: "inline-block",
-              minWidth: "60px",
-            }}
-          >
-            אינדקס
-          </div>
-          <div
-            style={{
-              width: "10px",
-              position: "relative",
-              letterSpacing: "0.02em",
-              lineHeight: "12px",
-              fontWeight: "500",
-              display: "inline-block",
-              minWidth: "10px",
-            }}
-          >
-            ]
-          </div>
-        </nav>
+        {/* Code for the navigation items */}
       </nav>
       <div
         style={{
@@ -153,6 +49,7 @@ const NavBar = () => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
+          position: "relative",
         }}
       >
         <a
@@ -169,6 +66,31 @@ const NavBar = () => {
         >
           פזמון: חוזר
         </a>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-30px",
+            left: "0",
+            right: "0",
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: "14px",
+            color: "#000",
+          }}
+        >
+          {years.map((year) => (
+            <div
+              key={year}
+              style={{
+                flex: "1",
+                borderRight: "1px solid #000",
+                textAlign: "center",
+              }}
+            >
+              {year}
+            </div>
+          ))}
+        </div>
       </div>
     </header>
   );

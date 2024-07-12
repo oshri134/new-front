@@ -16,6 +16,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-horizontal-scrolling-menu": "^7.1.1",
+    "react-horizontal-timeline": "^1.5.3",
     "react-nouislider": "^2.0.1",
     "react-range": "^1.8.14",
     "react-scripts": "5.0.1",
