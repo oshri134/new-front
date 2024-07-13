@@ -47,18 +47,6 @@
   flex-direction: column;
 }
 
-.song-timeline-wrapper {
-  height: 100%;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  overflow-y: hidden; /* Disable vertical scrolling */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-.song-timeline-wrapper::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
-}
-
 .song-timeline {
   display: flex;
   width: 100%; /* Ensure the timeline takes the full width */

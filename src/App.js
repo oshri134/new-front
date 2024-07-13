@@ -20,7 +20,7 @@ function App() {
 
   return (
     <>
-      <NavBar />
+      <NavBar minYear={yearRange[0]} maxYear={yearRange[1]} />
       <>
         <Grid container>
           <Grid item xs={12} md={10}>

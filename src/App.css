@@ -10,26 +10,84 @@
   padding: 20px;
   overflow-x: hidden;
   overflow-y: hidden;
-  position: relative; /* Ensure positioning relative to the parent container */
+  position: relative;
 }
 
 .timeline-container {
-  overflow-x: hidden; /* Disable horizontal scrolling */
-  overflow-y: hidden; /* Disable vertical scrolling */
-  white-space: nowrap; /* Ensure content does not wrap */
-  height: calc(100vh - 20px); /* Adjust height to fit within viewport */
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+  height: calc(100vh - 20px);
   display: flex;
   flex-direction: column;
 }
 
 .slider-container {
-  width: 100%; /* Ensure the container takes the full width */
+  width: 100%;
   display: flex;
   top: -66px;
   padding-left: 30rem;
   justify-content: center;
   background: transparent;
   position: relative;
-  padding: 20px 0; /* Add some vertical padding */
+  padding: 20px 0;
   z-index: 1;
+}
+
+.timeline {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background-color: #ccc;
+  margin: 50px 0;
+}
+
+.timeline-indicator {
+  position: absolute;
+  top: -8px;
+  width: 2px;
+  height: 20px;
+  background-color: red;
+}
+
+.timeline-year {
+  position: absolute;
+  top: -25px;
+  background: #fff;
+  padding: 2px 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.event-details {
+  position: absolute;
+  top: 60px;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 100;
+}
+
+.horizontal-timeline .events .date {
+  font-size: 14px;
+  color: black;
+}
+
+.horizontal-timeline .events .date.selected {
+  font-weight: bold;
+}
+
+.horizontal-timeline .events {
+  outline: none;
+}
+
+/* סגנונות חדשים להסתרת והצגת השנים בהובר */
+.react-horizontal-timeline .events-wrapper .events .timeline-event-label {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.react-horizontal-timeline .events-wrapper .events:hover .timeline-event-label {
+  opacity: 1;
 }
